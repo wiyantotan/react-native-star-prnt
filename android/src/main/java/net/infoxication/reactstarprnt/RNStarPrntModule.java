@@ -13,7 +13,6 @@ import android.provider.MediaStore;
 import android.text.TextPaint;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
 import android.text.StaticLayout;
 import android.text.Layout;
 import android.util.Base64;
@@ -164,7 +163,8 @@ public class RNStarPrntModule extends ReactContextBaseJavaModule {
 
     String portSettings = getPortSettingsOption(emulation);
     if (starIoExtManager != null && starIoExtManager.getPort() != null) {
-      starIoExtManager.disconnect(null);
+        IConnectionCallback icb = null;
+      starIoExtManager.disconnect(icb);
     }
     starIoExtManager = new StarIoExtManager(hasBarcodeReader ? StarIoExtManager.Type.WithBarcodeReader : StarIoExtManager.Type.Standard, portName, portSettings, 10000, context);
     starIoExtManager.setListener(starIoExtManagerListener);
